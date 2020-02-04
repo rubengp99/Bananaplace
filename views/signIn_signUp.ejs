@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Practice on Leiros - Sign In</title>
+    <style>
+        nav {
+            z-index: 1;
+        }
+
+        nav ul li a:hover {
+            background-color: #cf4374;
+        }
+
+        .no-margin {
+            margin: 0 !important;
+        }
+
+        .centered {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .logo-fix {
+            height: 64px !important;
+            overflow: hidden;
+        }
+
+        .s-large {
+            display: flex;
+            min-height: 500px;
+        }
+
+        .m-large {
+            display: flex;
+            min-height: 450px;
+        }
+
+        .text-muted {
+            color: #575656;
+        }
+
+        .parallax-background {
+            height: 100vh;
+            background-attachment: fixed;
+            background-image: url(https://wallpapercave.com/wp/wp3176709.jpg);
+            background-size: cover;
+        }
+
+        .fullscreen {
+            display: flex;
+            min-height: 100vh;
+            overflow: initial;
+            overflow-x: hidden;
+            scrollbar-width: none;
+        }
+
+
+
+        .carousel a {
+            color: black !important;
+        }
+
+        .carousel a:focus {
+            outline: none !important
+        }
+
+        .force-center {
+            position: absolute;
+            left: 50% !important;
+            transform: translateX(-50%)
+        }
+
+        .recover {
+            color: #1976d2;
+            font-size: 17px;
+        }
+
+        .recover:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body class="parallax-background">
+    <nav class="nav-extended black">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo logo-fix">
+                <div class="row logo-fix">
+                    <div class="col s4">
+                        <img class="circle"
+                            src="https://i.pinimg.com/originals/d5/ba/76/d5ba76d5455c34f2f1867bd21d325555.png"
+                            height="64" width="64">
+                    </div>
+                    <div class="col s8">
+                        <p class="no-margin">Bananaplace</p>
+                    </div>
+                </div>
+            </a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="hide-on-med-and-down right">
+                <li><a href=""><i class="material-icons prefix">search</i></a></li>
+                <li><a href="/" class="waves-effect waves-light">Home</a></li>
+                <li><a href="/add_product" class="waves-effect waves-light">Add Item</a></li>
+                <li><a href="/sign_in" class="waves-effect waves-light">Sign In</a></li>
+                <!--<li><a href="/profile" class="waves-effect waves-light">User</a></li>-->
+                <li><a href="/cart" class="waves-effect waves-light">Shopping Cart</a></li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+    <br>
+    <div class="row">
+        <div id="carousel" class="carousel carousel-slider fullscreen">
+            <a class="carousel-item transparent" href="#one!">
+                <div class="col s12 m6 force-center">
+                    <div class="card z-depth-2 grey lighten-5 s-large">
+                        <form class="col s12" method="POST">
+                            <h4 class="center" style="color:#26a69a;margin-top: 40px;">Login</h4>
+                            <br>
+                            <div class="col s12 center">
+                                <img class="circle"
+                                    src="https://i.pinimg.com/originals/d5/ba/76/d5ba76d5455c34f2f1867bd21d325555.png"
+                                    height="100" width="100">
+                            </div>
+                            <div class="row">
+                                <div class="col s1"></div>
+                                <div class="col s10">
+                                    <div class="row">
+                                        <form action="">
+                                            <div class="input-field col s12">
+                                                <i class="material-icons prefix">account_circle</i>
+                                                <input id="login_username" name="username" type="text" class="validate">
+                                                <label for="login_username">Username</label>
+                                            </div>
+                                            <div class="input-field col s12">
+                                                <i class="material-icons prefix">vpn_key</i>
+                                                <input id="login_password" name="password" type="password"
+                                                    class="validate">
+                                                <label for="login_password">Password</label>
+                                            </div>
+                                            <div class="col s12">
+                                                <p class="text-muted">
+                                                </p>
+                                            </div>
+                                            <div class="col s1"></div>
+                                            <div class="col s10 centered">
+                                                <div class="col s12 m6">
+                                                    <p onclick="login(this)"
+                                                        class="login light-blue darken-3 waves-effect waves-light btn centered">
+                                                        <i class="material-icons right">send</i>Login</p>
+                                                </div>
+                                                <div class="col s12 m6">
+                                                    <p onclick="move(1)"
+                                                        class="register teal darken-1 waves-effect waves-light btn centered">
+                                                        <i class="material-icons right">edit</i>Register</p>
+                                                </div>
+                                            </div>
+                                            <div class="col s1"></div>
+                                            <div class="col s12">
+                                                <div class="col s1"></div>
+                                                <div class="col s10">
+                                                    <p onclick="move(2)"
+                                                        class="recover waves-effect waves-light centered">
+                                                        Forgot your password?</p>
+                                                </div>
+                                                <div class="col s1"></div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col s1"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </a>
+            <a class="carousel-item transparent" href="#two!">
+                <div class="col s12 m6 force-center">
+                    <div class="card z-depth-2 grey lighten-5 s-large">
+                        <form class="col s12" method="POST">
+                            <h4 class="center" style="color:#26a69a;margin-top: 40px;">Register</h4>
+                            <div class="row">
+                                <div class="col s1"></div>
+                                <div class="col s10">
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <i class="material-icons prefix">person</i>
+                                            <input id="firstName" name="first_name" type="text" class="validate">
+                                            <label for="firstName">First Name</label>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <i class="material-icons prefix">person</i>
+                                            <input id="lastName" name="last_name" type="text" class="validate">
+                                            <label for="lastName">Last Name</label>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <i class="material-icons prefix">account_circle</i>
+                                            <input onkeypress="validate(this,'username')" id="username" name="username" type="text" class="validate">
+                                            <label for="username">Username</label>
+                                            <span class="helper-text" data-error="This username is already taken." data-success="It is available."></span>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <i class="material-icons prefix">person</i>
+                                            <input id="Password" name="password" type="password" class="validate">
+                                            <label for="Password">Password</label>
+                                            <span class="helper-text" data-error="Your password must contain numbers, an uppercase and a lowercase letter." data-success="This is a strong password."></span>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <i class="material-icons prefix">mail</i>
+                                            <input onkeypress="validate(this,'email')" id="email" name="email" type="email" class="validate">
+                                            <label for="email">Email</label>
+                                            <span class="helper-text" data-error="Sorry, but this email is already linked to another account." data-success="This one is okay."></span>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <i class="material-icons prefix">phone</i>
+                                            <input id="telephone" name="phone" type="tel" class="validate">
+                                            <label for="telephone">Telephone</label>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">local_shipping</i>
+                                            <textarea id="direction" name="direction" class="materialize-textarea"
+                                                data-lenght="120"></textarea>
+                                            <label for="direction">Direction</label>
+                                        </div>
+                                        <div class="col s12">
+                                            <label>
+                                                <input type="checkbox" class="filled-in" checked="checked" required/>
+                                                <span class="grey-text text-darken-3">I accept the <span
+                                                        class="pink-text text-accent-3">Terms of Service</span c> and
+                                                    the <span class="pink-text text-accent-3">Privacy
+                                                        Politics</span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <p onclick="register(this)"
+                                        class="teal darken-1 waves-effect waves-light btn centered"><i
+                                            class="material-icons right">send</i>Create Account</p>
+                                    <p onclick="move(0)"
+                                        class="light-blue darken-3 waves-effect waves-light btn centered"><i
+                                            class="material-icons right">arrow_back</i>I have an Account</p>
+                                </div>
+                                <div class="col s1"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </a>
+            <a class="carousel-item transparent" href="#three!">
+                <div class="col s12 m6 force-center">
+                    <div class="card z-depth-2 grey lighten-5 m-large">
+                        <form class="col s12">
+                            <h4 class="center" style="color:#26a69a;margin-top: 40px;">Password Recover</h4>
+                            <br>
+                            <div class="col s12 center">
+                                <img class="circle"
+                                    src="https://images.assetsdelivery.com/compings_v2/timflashid/timflashid1801/timflashid180100012.jpg"
+                                    height="100" width="100">
+                            </div>
+                            <div class="row">
+                                <div class="col s1"></div>
+                                <div class="col s10">
+                                    <div class="row">
+                                        <form action="">
+                                            <div class="input-field col s12">
+                                                <i class="material-icons prefix">mail</i>
+                                                <input onkeypress="validate(this,'email')" id="Recover_email" name="email" type="text" class="validate">
+                                                <label for="Recover_email">Email</label>
+                                            </div>
+                                            <div class="col s12">
+                                                <p class="text-muted">
+                                                    We will send you an email with the instructions to recover your
+                                                    password.
+                                                </p>
+                                            </div>
+                                            <div class="col s12 centered">
+                                                <div class="col s12 m6">
+                                                    <p onclick="move(0)"
+                                                        class="register red darken-3 waves-effect waves-light btn centered">
+                                                        <i class="material-icons right">arrow_back</i>Nevermind</p>
+                                                </div>
+                                                <div class="col s12 m6">
+                                                    <p onclick="recover(this)"
+                                                        class="login light-blue darken-3 waves-effect waves-light btn centered">
+                                                        <i class="material-icons right">mail</i>Recover</p>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col s1"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script>
+        $('select').formSelect();
+        $('textarea#direction').characterCounter();     
+        let elems = document.querySelectorAll('.carousel');
+        let carousel = M.Carousel.init(elems, {fullWidth : true});
+        let carouselInstance = M.Carousel.getInstance(document.getElementById('carousel'));
+        document.getElementById("carousel").removeEventListener('mousedown', carouselInstance._handleCarouselTapBound);
+        document.getElementById("carousel").removeEventListener('mousemove', carouselInstance._handleCarouselDragBound);
+        document.getElementById("carousel").removeEventListener('mouseup', carouselInstance._handleCarouselReleaseBound);
+        document.getElementById("carousel").removeEventListener('mouseleave', carouselInstance._handleCarouselReleaseBound);
+        document.getElementById("carousel").removeEventListener('click', carouselInstance._handleCarouselClickBound);
+
+        function move(index) {
+            carousel[0].set(index);
+        }
+
+        function register(elem){
+            let form = $(elem).parentsUntil('form').find('.col.s10').find('.row').children();
+            let user = {
+                first_name : $(form).eq(0).find('input').val(),
+                last_name : $(form).eq(1).find('input').val(),
+                username : $(form).eq(2).find('input').val(),
+                password : $(form).eq(3).find('input').val(),
+                email : $(form).eq(4).find('input').val(),
+                phone : $(form).eq(5).find('input').val(),
+                direction : $(form).eq(6).find('textarea').val(),
+            }
+            Swal.fire({
+                title: "Just Checking.",
+                text: "Are you sure all the fields are correct?",
+                icon: 'warning',
+                confirmButtonColor: '#3085d6',
+                showCloseButton: true,
+                showCancelButton: true,
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes.',
+                cancelButtonText: 'No, wait.'
+            }).then((result) => {
+                if (result.value) {
+                    var promise = $.ajax({
+                        type: 'POST',
+                        url: "/add_user",
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        data: JSON.stringify(user),
+
+                    });
+
+                    promise.always((data) => {
+                        if (data.error) {
+                            Swal.fire({
+                                title: "Something went wrong!",
+                                html : data.error,
+                                icon: 'error'
+                            })
+                        } else {
+                            Swal.fire({
+                                title: "It's done!",
+                                html: data.success,
+                                icon: 'success'   
+                            }).then((result)=>{
+                                move(0);
+                            })
+                        }
+                    });
+
+                }
+            });
+        }
+
+        function validate(elem,data){
+
+        }
+
+    </script>
+</body>
+
+</html>

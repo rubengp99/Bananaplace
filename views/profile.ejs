@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" type="image/icon" href="icon.ico">
+    <title>Practice on Leiros - Profile</title>
+</head>
+<style>
+    @keyframes selected_icon {
+        from {
+            border: 3px #51eaea ridge;
+            padding: 2px;
+        }
+
+        to {
+            border: 3px #272343 ridge;
+            padding: 2px;
+        }
+    }
+
+    #avatar {
+        padding: 3px;
+        border: 3px black solid;
+    }
+
+    nav ul li a:hover {
+        background-color: #cf4374;
+    }
+
+    .flex-center {
+        justify-content: center;
+        display: flex;
+        flex-wrap: wrap;
+
+    }
+
+    .card.extra-large {
+        min-height: 855px;
+    }
+
+    .sticky-bottom {
+        position: relative;
+        top: 70px;
+        z-index: 0;
+    }
+
+    .z-depth-fix {
+        z-index: 1;
+    }
+
+    .SUCCESS {
+        background: #00e676;
+    }
+
+    .REMOVED {
+        background: #d32f2f;
+    }
+
+    .WARNING {
+        background: #f9a825;
+    }
+
+    .icon-container {
+        margin: 15px;
+        left: auto;
+        right: auto;
+        float: left;
+        box-sizing: border-box;
+        width: 120px;
+        height: 120px;
+        display: flex;
+    }
+
+    .icon-container:hover {
+        width: 120px;
+        height: 120px;
+        padding: 2px;
+        border: 3px #26a69a ridge;
+    }
+
+    .icon-container .selected {
+        animation: selected_icon 2s infinite;
+        width: 120px;
+        height: 120px;
+    }
+
+    .clickable {
+        cursor: pointer;
+    }
+
+    .scrollable {
+        overflow-y: scroll;
+    }
+
+    section>div>table>tbody>tr:nth-child(1)>td {
+        color: #424242;
+    }
+
+    .no-margin {
+        margin: 0 !important;
+    }
+
+    .grey-bordered {
+        border: 1px #bdbdbd solid;
+    }
+
+    .no-padding {
+        padding: 0;
+    }
+
+    .connect:hover>a>strong {
+        text-decoration: underline;
+    }
+
+    .centered {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .text-muted {
+        color: #575656;
+    }
+
+    .valigned {
+        vertical-align: middle;
+    }
+
+
+    .circle {
+        border-radius: 50%;
+    }
+
+    .logo-fix {
+        height: 64px !important;
+        overflow: hidden;
+    }
+
+    .sidebar-hoverable>tbody>.active {
+        border-left: 5px #f50057 solid;
+        background: #eeeeee;
+    }
+
+    .sidebar-hoverable>tbody>.active>td {
+        color: black;
+        font-weight: bold;
+    }
+
+    .sidebar-hoverable>tbody>tr>td {
+        color: #616161;
+    }
+
+    .sidebar-hoverable>tbody>tr>td>i {
+        vertical-align: middle;
+    }
+
+    .sidebar-hoverable>tbody>tr:hover {
+        cursor: pointer;
+        background: #e0e0e0;
+        color: black;
+    }
+
+    .sidebar-hoverable>tbody>tr:hover td {
+        color: black;
+    }
+
+    .card .btn:hover {
+        background-color: black !important;
+    }
+
+    .card .card-image img {
+        height: 200px;
+    }
+</style>
+
+<body>
+    <nav class="nav-extended black">
+        <div class="nav-wrapper">
+            <a href="" class="brand-logo logo-fix">
+                <div class="col s4">
+                    <img class="circle" src="https://i.pinimg.com/originals/d5/ba/76/d5ba76d5455c34f2f1867bd21d325555.png" height="64"
+                        width="64">
+                </div>
+                <div class="col s8">
+                    <p class="no-margin">Bananaplace</p>
+                </div>
+            </a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="hide-on-med-and-down right">
+                <li><a href=""><i class="material-icons prefix">search</i></a></li>
+                <li><a href="/" class="waves-effect waves-light">Home</a></li>
+                <li><a href="/add_product" class="waves-effect waves-light">Add Item</a></li>
+                <li><a href="/profile" class="waves-effect waves-light">Profile</a></li>
+                <li><a href="/cart" class="waves-effect waves-light">Shopping Cart</a></li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+
+    <div class="row">
+        <div class="col s2">
+            <table class="sidebar-hoverable">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="valign-wrapper">
+                                <img class="circle"
+                                    src="https://cdn2.iconfinder.com/data/icons/people-flat-design/64/Man-Person-People-Avatar-User-Happy-512.png"
+                                    height="45" width="45">
+                                <p class="right">&nbsp;&nbsp;&nbsp;USER SETTINGS</p>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr data-target="Profile" class="tab_section active" onclick="activate(this)">
+                        <td><i class="material-icons">person</i> &nbsp;Profile</td>
+                    </tr>
+                    <tr data-target="Account" class="tab_section" onclick="activate(this)">
+                        <td><i class="material-icons">account_circle</i> &nbsp;Account</td>
+                    </tr>
+                    <tr data-target="Products" class="tab_section" onclick="activate(this)">
+                        <td><i class="material-icons">shopping_basket</i> &nbsp;Products</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <section class="col s10" id="Profile">
+            <div class="col s12">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>User Settings&nbsp;<i
+                                    class="material-icons valigned">keyboard_arrow_right</i>&nbsp;Profile</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="col s4">
+                                    <h4><strong>Your Avatar</strong></h4>
+                                    <p class="text-muted">Upload your own, or <a id="predefined"
+                                            class="clickable">choose a predefined
+                                            one</a> from our list!.</p>
+                                </div>
+                                <div class="col s4">
+                                    <img id="avatar" class="centered circle"
+                                        src="https://image.winudf.com/v2/image/Y29tLnNwLm5hYnVsYV93YWxscGFwZXJfc2NyZWVuXzZfMTUxNzc3OTk3OV8wODA/screen-6.jpg?fakeurl=1&type=.jpg"
+                                        width="200" height="200">
+                                </div>
+                                <div class="col s4">
+                                    <form action="update">
+                                        <div class="file-field input-field">
+                                            <div class="btn">
+                                                <span>File</span>
+                                                <input id="avatarFile" type="file">
+                                            </div>
+                                            <div class="file-path-wrapper">
+                                                <input class="file-path validate" type="text">
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <p class="text-muted">We don't allow files over 2mb, please be careful!.</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="col s4">
+                                    <h4><strong>Other Settings</strong></h4>
+                                    <p class="text-muted">Change other things like your name, username, or something
+                                        else here.</p>
+                                </div>
+                                <div class="col s8">
+                                    <div class="col s12">
+                                        <form id="update_profile">
+                                            <div class="row">
+                                                <div class="input-field col s6">
+                                                    <i class="material-icons prefix">person</i>
+                                                    <input id="First_name" type="text" class="validate">
+                                                    <label for="First_name">First Name</label>
+                                                    <span class="helper-text"
+                                                        data-error="Do not include numbers here, please."
+                                                        data-success="It's ok, cool name.">For example: Ruben, not
+                                                        Ruben15.</span>
+                                                </div>
+                                                <div class="input-field col s6">
+                                                    <i class="material-icons prefix">person</i>
+                                                    <input id="Last_name" type="text" class="validate">
+                                                    <label for="Last_name">Last Name</label>
+                                                    <span class="helper-text"
+                                                        data-error="Do not include numbers here, please."
+                                                        data-success="It's ok, cool name.">For example: Garcia, not
+                                                        Garcia15.</span>
+                                                </div>
+                                                <div class="input-field col s6">
+                                                    <i class="material-icons prefix">email</i>
+                                                    <input id="Email" type="email" class="validate">
+                                                    <label for="Email">Email</label>
+                                                    <span class="helper-text" data-error="Please enter a valid email."
+                                                        data-success="It's ok.">We will send you a verification email to
+                                                        this direction.</span>
+                                                </div>
+                                                <div class="input-field col s6">
+                                                    <i class="material-icons prefix">vpn_key</i>
+                                                    <input id="Password" type="text" class="validate">
+                                                    <label for="Password">Password</label>
+                                                    <span class="helper-text"
+                                                        data-error="Looks like there's a missing requeriment here."
+                                                        data-success="Cool, this password is strong.">Your password must
+                                                        contain letters, numbers and special characters.</span>
+                                                </div>
+                                                <div class="input-field col s6">
+                                                    <i class="material-icons prefix">perm_identity</i>
+                                                    <input id="Document" type="text" class="validate">
+                                                    <label for="Document">Document</label>
+                                                    <span class="helper-text" data-error="wrong"
+                                                        data-success="It's ok, thank you.">Include the ID number on your
+                                                        document.</span>
+                                                </div>
+                                                <div class="input-field col s6">
+                                                    <select>
+                                                        <option value="" disabled selected>Document Type</option>
+                                                        <option value="1">Passport</option>
+                                                        <option value="2">License</option>
+                                                        <option value="3">National ID</option>
+                                                    </select>
+                                                    <span class="helper-text" data-error="wrong"
+                                                        data-success="It's ok, thank you.">Specify the type of document
+                                                        you're inputting.</span>
+                                                </div>
+                                                <div class="input-field col s6">
+                                                    <i class="material-icons prefix">phone</i>
+                                                    <input id="Telephone" type="tel" class="validate">
+                                                    <label for="Telephone">Telephone</label>
+                                                    <span class="helper-text"
+                                                        data-error="A phone number can't contain letters, please try again."
+                                                        data-success="It's ok, thank you.">Do not include letters here,
+                                                        please.</span>
+                                                </div>
+                                                <div class="input-field col s6">
+                                                    <i class="material-icons prefix">today</i>
+                                                    <input id="Birthday" type="text" class="datepicker">
+                                                    <label for="Birthday">Birth Date</label>
+                                                    <span class="helper-text"
+                                                        data-error="A phone number can't contain letters, please try again."
+                                                        data-success="It's ok, thank you.">Pick your birth date.</span>
+                                                </div>
+                                                <div class="input-field col s12">
+                                                    <i class="material-icons prefix">local_shipping</i>
+                                                    <textarea id="Direction" class="materialize-textarea"></textarea>
+                                                    <label for="Direction">Direction</label>
+                                                    <span class="helper-text"
+                                                        data-error="A phone number can't contain letters, please try again."
+                                                        data-success="It's ok, thank you.">Your packages will be
+                                                        delivered
+                                                        to this direction.</span>
+                                                </div>
+                                                <button class="btn waves-effect waves-light right" type="submit"
+                                                    name="action">Update Profile
+                                                    <i class="material-icons right">send</i>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="col s10 hide" id="Account">
+            <div class="col s12">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>User Settings&nbsp;<i
+                                    class="material-icons valigned">keyboard_arrow_right</i>&nbsp;Account</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="col s4">
+                                    <h4><strong>Change Username</strong></h4>
+                                    <p class="text-muted">Changing your username may bring problems to other users to
+                                        recognize you, please be careful with this.</p>
+                                </div>
+                                <div class="col s8">
+                                    <form id="update_username" class="col s12">
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <i class="material-icons prefix">account_circle</i>
+                                                <input id="Username" type="text" class="validate">
+                                                <label for="Username">Username</label>
+                                                <span class="helper-text"
+                                                    data-error="Do not include numbers here, please."
+                                                    data-success="It's ok, cool name.">Special characters are not
+                                                    allowed here.</span>
+                                            </div>
+                                            <button class="btn waves-effect waves-light right" type="submit"
+                                                name="action">Update Account
+                                                <i class="material-icons right">send</i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="col s4">
+                                    <h4><strong>Social Media</strong></h4>
+                                    <p class="text-muted">You can link your social media profiles here to improve your
+                                        reputation on our platform.</p>
+                                </div>
+                                <div class="col s8">
+                                    <form class="col s12">
+                                        <div class="row">
+                                            <div class="col s3 z-depth-2 no-padding grey-bordered"
+                                                style="padding: 3px 0px !important;margin:5px;">
+                                                <div class="col s4 no-padding center "
+                                                    style="border-right:1px #bdbdbd solid;">
+                                                    <svg class="valigned" style="width:30px;height:30px"
+                                                        viewBox="0 0 24 24">
+                                                        <path fill="#0277bd"
+                                                            d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z" />
+                                                    </svg>
+                                                </div>
+                                                <div class="col s8 connect" style="vertical-align: middle !important;
+                                                display: inline !important;
+                                                float: none;">
+                                                    <a href="#"><strong>Facebook</strong></a>
+                                                </div>
+                                            </div>
+                                            <div class="col s3 z-depth-2 no-padding grey-bordered"
+                                                style="padding: 3px 0px !important;margin:5px;">
+                                                <div class="col s4 no-padding center "
+                                                    style="border-right:1px #bdbdbd solid;">
+                                                    <svg class="valigned" style="width:30px;height:30px"
+                                                        viewBox="0 0 24 24">
+                                                        <path fill="#4fc3f7"
+                                                            d="M17.71,9.33C18.19,8.93 18.75,8.45 19,7.92C18.59,8.13 18.1,8.26 17.56,8.33C18.06,7.97 18.47,7.5 18.68,6.86C18.16,7.14 17.63,7.38 16.97,7.5C15.42,5.63 11.71,7.15 12.37,9.95C9.76,9.79 8.17,8.61 6.85,7.16C6.1,8.38 6.75,10.23 7.64,10.74C7.18,10.71 6.83,10.57 6.5,10.41C6.54,11.95 7.39,12.69 8.58,13.09C8.22,13.16 7.82,13.18 7.44,13.12C7.81,14.19 8.58,14.86 9.9,15C9,15.76 7.34,16.29 6,16.08C7.15,16.81 8.46,17.39 10.28,17.31C14.69,17.11 17.64,13.95 17.71,9.33M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2Z" />
+                                                    </svg>
+                                                </div>
+                                                <div class="col s8 connect" style="vertical-align: middle !important;
+                                                display: inline !important;
+                                                float: none;">
+                                                    <a href="#"><strong>Twitter</strong></a>
+                                                </div>
+                                            </div>
+                                            <div class="col s3 z-depth-2 no-padding grey-bordered"
+                                                style="padding: 3px 0px !important;margin:5px;">
+                                                <div class="col s4 no-padding center "
+                                                    style="border-right:1px #bdbdbd solid;">
+                                                    <img class="valigned"
+                                                        src="https://img.icons8.com/color/48/000000/google-logo.png"
+                                                        height="30">
+                                                </div>
+                                                <div class="col s8 connect" style="vertical-align: middle !important;
+                                                display: inline !important;
+                                                float: none;">
+                                                    <a href="#"><strong>Google</strong></a>
+                                                </div>
+                                            </div>
+                                            <div class="col s3 z-depth-2 no-padding grey-bordered"
+                                                style="padding: 3px 0px !important;margin:5px;">
+                                                <div class="col s4 no-padding center "
+                                                    style="border-right:1px #bdbdbd solid;">
+                                                    <img class="valigned"
+                                                        src="https://img.icons8.com/color/50/000000/instagram-new.png"
+                                                        height="30">
+                                                </div>
+                                                <div class="col s8 connect" style="vertical-align: middle !important;
+                                                display: inline !important;
+                                                float: none;">
+                                                    <a href="#"><strong>Instagram</strong></a>
+                                                </div>
+                                            </div>
+                                            <div class="col s3 z-depth-2 no-padding grey-bordered"
+                                                style="padding: 3px 0px !important;margin:5px;">
+                                                <div class="col s4 no-padding center "
+                                                    style="border-right:1px #bdbdbd solid;">
+                                                    <img class="valigned"
+                                                        src="https://img.icons8.com/plasticine/100/000000/snapchat.png"
+                                                        height="30"> </div>
+                                                <div class="col s8 connect" style="vertical-align: middle !important;
+                                                display: inline !important;
+                                                float: none;">
+                                                    <a href="#"><strong>Snapchat</strong></a>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="col s10 hide" id="Products">
+            <div class="col s12">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>User Settings&nbsp;<i
+                                    class="material-icons valigned">keyboard_arrow_right</i>&nbsp;Products</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col s12">
+                                        <h4 class="center"><strong>Manage Products</strong></h4>
+                                        <p class="text-muted center">You can can manage your published products here.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row products">
+                                    <% for (let i = 0; i < results.length; i++) { 
+                                    %>
+                                    <div class="col s12 m4">                                  
+                                        <div class="card hoverable">
+                                            <input class="id_container" type="hidden" name="id"
+                                            value="<%- results[i][5] %>">
+                                            <div class="card-image waves-effect waves-block waves-light">
+                                                <img class="activator" src='<%- results[i][2] %>'>
+                                            </div>
+                                            <div class="card-content">
+                                                <span
+                                                    class="card-title activator grey-text text-darken-4"><span><%- results[i][0] %></span>
+                                                    <i class="material-icons right">more_vert</i>
+                                                </span>
+                                                <p class="card-title activator pink-text text-accent-3">
+                                                    <span><%- results[i][1] + '$' %></span>
+                                                    <a onclick="edit(this)"
+                                                        class="waves-effect waves-light btn small right pink accent-3 edit-btn">
+                                                        <svg class="valigned" xmlns="http://www.w3.org/2000/svg"
+                                                            width="24" height="24" viewBox="0 0 24 28">
+                                                            <path fill="#FFFFFF"
+                                                                d="M1.438 16.872l-1.438 7.128 7.127-1.438 12.642-12.64-5.69-5.69-12.641 12.64zm2.271 2.253l-.85-.849 11.141-11.125.849.849-11.14 11.125zm20.291-13.436l-2.817 2.819-5.69-5.691 2.816-2.817 5.691 5.689z" />
+                                                        </svg>
+                                                    </a>
+                                                </p>
+                                            </div>
+                                            <div class="card-reveal">
+                                                <span class="card-title grey-text text-darken-4"><%- results[i][0] %><i
+                                                        class="material-icons right">close</i></span>
+                                                <p><%- results[i][4] %></p>
+                                                <p>From <span
+                                                        class="pink-text text-accent-3"><%-  results[i][3]  %></span>
+                                                    Category</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%   
+                                        }                        
+                                    %>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+
+        <!-- PREDEFINED ICONS MODAL -->
+        <div id="predefined_icons" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <div class="row">
+                    <h4><strong>Choose your Avatar</strong></h4>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="row flex-center">
+                            <div class="icon-container">
+                                <img class="img_icon hoverable clickable z-depth-3" onclick="icon_selected(this)"
+                                    src="http://paranoidandroid.co/assets/wallpapers/2018/submerged_desktop_thumb.jpg"
+                                    alt="" width="120" height="120">
+                            </div>
+                            <div class="icon-container">
+                                <img class="img_icon hoverable clickable z-depth-3" onclick="icon_selected(this)"
+                                    src="https://steamuserimages-a.akamaihd.net/ugc/940586530515504757/CDDE77CB810474E1C07B945E40AE4713141AFD76/"
+                                    alt="" width="120" height="120">
+                            </div>
+                            <div class="icon-container">
+                                <img class="img_icon hoverable clickable z-depth-3" onclick="icon_selected(this)"
+                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWpWE9di3oqOyFc3syU7LEi06KclmQJWl2thRjAjvsrBrp1dzjCg&s"
+                                    alt="" width="120" height="120">
+                            </div>
+                            <div class="icon-container">
+                                <img class="img_icon hoverable clickable z-depth-3" onclick="icon_selected(this)"
+                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCHE-4uy1bKAct3CFB7MmJ7Dnqd-cKaH2iRtz8cjzXbMKzSPwwJQ&s"
+                                    alt="" width="120" height="120">
+                            </div>
+                            <div class="icon-container">
+                                <img class="img_icon hoverable clickable z-depth-3" onclick="icon_selected(this)"
+                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8fF3GsSZjWk1-L3VCcSogqKVkst-C_8WTrRQl5ueTWLkjLjg0ag&s"
+                                    alt="" width="120" height="120">
+                            </div>
+                            <div class="icon-container">
+                                <img class="img_icon hoverable clickable z-depth-3" onclick="icon_selected(this)"
+                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwiI3ieiydRcpMbavkjZblw-cZ0PkAZw6R5ri0oUvotNLWguO_&s"
+                                    alt="" width="120" height="120">
+                            </div>
+                            <div class="icon-container">
+                                <img class="img_icon hoverable clickable z-depth-3" onclick="icon_selected(this)"
+                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIvoiB-IloLrRTqgTkx5ZPiTCDiNMhwe4mVc2rpzws6BJ3SUQ2&s"
+                                    alt="" width="120" height="120">
+                            </div>
+                            <div class="icon-container">
+                                <img class="img_icon hoverable clickable z-depth-3" onclick="icon_selected(this)"
+                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL41tcNG-1p21_kcTjp0GKo5cvf2i_uELbHTot4wURb1nXtrfj&s"
+                                    alt="" width="120" height="120">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a id="ok_icon" href="#!" class="modal-close waves-effect waves-green btn">I like this one.</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="http://malsup.github.com/jquery.form.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script>
+        // ************************ JAVASCRIPT (PURE) SOLUTIONS ******************
+        'use strict';
+        document.addEventListener('DOMContentLoaded', function () {
+            let elems = document.querySelectorAll('.modal');
+            let instances = M.Modal.init(elems);
+            elems = document.querySelectorAll('.datepicker');
+            instances = M.Datepicker.init(elems);
+            elems = document.querySelectorAll('select');
+            instances = M.FormSelect.init(elems);
+        });
+
+        let icons_modal_trigger = document.getElementById("predefined");
+        icons_modal_trigger.addEventListener('click', () => {
+            let icons_modal = M.Modal.getInstance(document.getElementById("predefined_icons"));
+            icons_modal.open();
+        });
+
+        //This code changes the profile picture preview on /profile page
+        if (window.location.href.indexOf("profile") > -1) {
+            document.getElementById('avatarFile').addEventListener('change', readURL, true);
+            function readURL() {
+                let file = document.getElementById("avatarFile").files[0];
+                let reader = new FileReader();
+                reader.onloadend = function () {
+                    document.getElementById('avatar').setAttribute('src', reader.result);
+                }
+                if (file) {
+                    reader.readAsDataURL(file);
+                } else {
+                }
+            }
+        }
+
+        //this function toggles the diferents tabs on /profile page
+        function activate(elem) {
+            const sections = [
+                "Profile",
+                "Account",
+                "Products"
+            ];
+            let tabs = document.getElementsByClassName('tab_section');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active')
+                document.getElementById(sections[i]).classList.add('hide');
+            }
+            elem.classList.add('active');
+            let open_tab = elem.getAttribute('data-target');
+            document.getElementById(open_tab).classList.remove('hide');
+        }
+
+        //MARK AVATAR ICON AS SELECTED ON MODAL WITH A BORDER
+        let selected_icon = '';
+        function icon_selected(elem) {
+            let icons = document.getElementsByClassName("img_icon");
+            for (let i = 0; i < icons.length; i++) {
+                icons[i].classList.remove("selected");
+
+            }
+            elem.classList.add("selected");
+            selected_icon = elem.getAttribute("src");
+        }
+        //TRIGGER A CHANGE ON THE AVATAR PREVIEW WHEN CHOOSING A PREDEFINED ICON
+        let change_predefined_icon_trigger = document.getElementById("ok_icon");
+        change_predefined_icon_trigger.addEventListener("click", () => {
+            document.getElementById('avatar').setAttribute('src', selected_icon);
+        });
+
+        //TRIGGER FOR SOCIAL MEDIA NOT ADDED YET
+        let social = document.getElementsByClassName("connect");
+        for (let i = 0; i < social.length; i++) {
+            social[i].addEventListener('click', () => {
+                Swal.fire({
+                    title: "Maintainance",
+                    text: "Social media integrations aren't available. This is only a demo project.",
+                    icon: 'warning',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'I understand.'
+                });
+            });
+        }
+
+        // ************************ JAVASCRIPT (JQUERY) SOLUTIONS ******************
+        let product = null;
+        //TRANSFORMS A CARD INTO AN EDITABLE FORM
+        function edit(elem) {
+            let card = $(elem).parentsUntil('.col');
+            let product_list = $('.row.products').children();
+            if (product != null) {
+                product.id = card.parent().find('input[name=id]').val();
+                for (let i = 0; i < product_list.length; i++) {
+                    if ($(product_list[i]).find('.card').hasClass('editable')) {
+                        $(product_list[i]).find('.card').removeClass('extra-large');
+                        $(product_list[i]).find('.card').removeClass('editable');
+                        $(product_list[i]).find('.card').html(`
+                            <input class="id_container" type="hidden" name="id"
+                                value="` + product.id + `">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="activator" src='` + product.photo + `'>
+                            </div>
+                            <div class="card-content">
+                                <span
+                                    class="card-title activator grey-text text-darken-4"><span>` + product.name + `</span>
+                                    <i class="material-icons right">more_vert</i>
+                                </span>
+                                <p class="card-title activator pink-text text-accent-3">
+                                    <span>` + product.price + "$" + `</span>
+                                        <a onclick="edit(this)"
+                                            class="waves-effect waves-light btn small right pink accent-3 edit-btn">
+                                            <svg class="valigned" xmlns="http://www.w3.org/2000/svg"
+                                                width="24" height="24" viewBox="0 0 24 28">
+                                                <path fill="#FFFFFF"
+                                                    d="M1.438 16.872l-1.438 7.128 7.127-1.438 12.642-12.64-5.69-5.69-12.641 12.64zm2.271 2.253l-.85-.849 11.141-11.125.849.849-11.14 11.125zm20.291-13.436l-2.817 2.819-5.69-5.691 2.816-2.817 5.691 5.689z" />
+                                            </svg>
+                                        </a>
+                                </p>
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">` + product.name + `<i
+                                    class="material-icons right">close</i></span>
+                                <p>` + product.description + `</p>
+                                <p>From <span
+                                    class="pink-text text-accent-3">` + product.category + `</span>
+                                Category</p>
+                            </div>
+                        `)
+                    }
+                }
+            }
+            console.log(card.parent().find('input[name=id]').val())
+            $(card).addClass('editable');
+            let aux_card = card;
+            card.parent().find('.card').addClass('extra-large');       
+            product = {
+                id: card.parent().find('input[name=id]').val(),
+                photo: card.parent().find('.card-image').find('img').attr('src'),
+                name: card.parent().find('.card-title').eq(0).find('span').text(),
+                price: card.parent().find('.card-title').eq(1).find('span').text().replace('$', ''),
+                description: card.parent().find('.card-reveal').find('p').eq(0).text(),
+                category: card.parent().find('.card-reveal').find('p').eq(1).find('span').text(),
+                stock: 0
+            };
+            console.log(product);
+            card.parent().find('.card').html(`             
+                <div class="card-image waves-effect waves-block waves-light z-depth-fix">
+                    <img src='` + product.photo + `'>
+                </div>
+                <input class="id_container" type="hidden" name="product_id"
+                                                value="`+ product.id + `">
+                <input class="photo_container" type="hidden" name="old_photo" value="` + product.photo + `"/>
+                <form class="col s12" action="/update_product"  method="POST" name="product" enctype="multipart/form-data">
+                    <div class="file-field input-field z-depth-fix">
+                        <div class="btn">
+                            <span>Image</span>
+                            <input onchange="image_preview(this)" type="file" name="product_photo">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" name="product_path" type="text" value="` + product.photo + `">
+                        </div>
+                    </div>
+                    <div class="input-field col s12 z-depth-fix">
+                        <i class="material-icons prefix active">account_circle</i>
+                        <input id="productName" name="product_name" type="text" class="active" value="` + product.name + `">
+                        <label class="active" for="productName">Product Name</label>
+                    </div>
+                    <div class="input-field col s12 z-depth-fix">
+                        <i class="material-icons prefix active">attach_money</i>
+                        <input id="productPrice" name="product_price" type="number" class="active" value="` + product.price + `">
+                        <label class="active" for="productPrice">Product Price ($)</label>
+                    </div>
+                    <div class="input-field col s12 z-depth-fix">
+                        <i class="material-icons prefix active">description</i>
+                        <textarea id="productDescription" name="product_description" class="active materialize-textarea" data-length="120" maxlength="120">` + product.description + `</textarea>
+                        <label class="active" for="productDescription">Product Description</label>
+                    </div>                  
+                    <div class="input-field col s12 z-depth-fix">
+                        <i class="material-icons prefix active">add_shopping_cart</i>
+                        <input id="productStock" name="product_stock" type="number" class="active" value="` + product.stock + `">
+                        <label class="active" for="productStock">Product Stock</label>
+                    </div>
+                    <div class="input-field col s12 z-depth-fix">
+                        <i class="material-icons prefix active">format_list_numbered</i>
+                        <select name="product_category">
+                            <option value="" disabled selected>Choose a Category</option>
+                            <option value="1">Food</option>
+                            <option value="2">Drink</option>
+                            <option value="3">Flower</option>
+                        </select>
+                        <label>Product Category</label>
+                    </div>   
+                    <div class="row sticky-bottom">
+                        <div class="col s6">
+                            <a onclick="remove(this)" class="remove waves-effect waves-light btn centered red darken-2"><i
+                                class="material-icons right">delete</i>Delete</a>
+                        </div>
+                        <div class="col s6">
+                            <a onclick="update(this)" class="update waves-effect waves-light btn centered"><i
+                                class="material-icons right">send</i>Update</a>
+                        </div>                       
+                    </div>                                               
+                </form>                            
+            `);
+            $('select').formSelect();
+            $('textarea#productDescription').characterCounter();
+        }
+
+        //SENDS A REQUEST TO DELETE THE EDITABLE CARD FROM THE SYSTEM
+        function remove(elem) {
+            let product_list = $('.row.products').children();
+            let card = $(elem).parentsUntil('div.s12.m4');
+            // CARD HAS AN OBJECT LIKE THIS { 0: ... , 1: ... , 2: FORM (OUR TARGET) }
+            let form = card[2];
+            Swal.fire({
+                title: "Reminder.",
+                text: "This action can not be reverted, are you sure about deleting this product?",
+                icon: 'warning',
+                confirmButtonColor: '#3085d6',
+                showCloseButton: true,
+                showCancelButton: true,
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete.',
+                cancelButtonText: 'No, wait.'
+            }).then((result) => {
+                if (result.value) {
+                    var promise = $.ajax({
+                        type: 'POST',
+                        url: "/remove_product",
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        data: JSON.stringify(product),
+
+                    });
+
+                    promise.always((data) => {
+                        if (data.status === 404 && data.request === 'DELETE') {
+                            M.toast({ html: '<strong>' + data.success + '</strong>', classes: 'WARNING' });
+                        } else {
+                            for (let i = 0; i < product_list.length; i++) {
+                                ($(product_list[i]).find('id_container').val() === card.find('id_container').val()) ? product_list[i].remove() : null;
+                            }
+                            M.toast({ html: '<strong>' + data.success + '</strong>', classes: 'REMOVED' });
+                        }
+                    });
+
+                }
+            });
+        }
+
+        //SENDS AN ASYNC POST TO BACKEND TO UPDATED THE EDITABLE CARD
+        function update(elem, e) {
+            let card = $(elem).parentsUntil('div.s12.m4');
+            // CARD HAS AN OBJECT LIKE THIS { 0: ... , 1: ... , 2: FORM (OUR TARGET) }
+            let form = card[2];
+            let aux = "";
+            let new_photo = ($(form).find("input[name=product_photo]").prop('files')[0]) ? $(form).find("input[name=product_photo]").prop('files')[0].name : product.photo;
+
+            var product_updated = {
+                id: product.id,
+                old_photo: product.photo,
+                photo_file: $(form).find("input[name=product_photo]").prop('files')[0],
+                photo: new_photo,
+                name: $(form).find("input[name=product_name]").val(),
+                price: $(form).find("input[name=product_price]").val(),
+                description: $(form).find("textarea[name=product_description]").val(),
+                category: $(form).find("select[name=product_category]").val(),
+                stock: $(form).find("input[name=product_stock]").val()
+            };
+            switch (product_updated.category) {
+                case '1':
+                    aux = 'Food';
+                    break;
+
+                case '2':
+                    aux = 'Drink';
+                    break;
+
+                case '3':
+                    aux = 'Flower';
+                    break;
+            }
+            Swal.fire({
+                title: "Just checking.",
+                text: "Are you sure all the fields are correct?",
+                icon: 'warning',
+                confirmButtonColor: '#3085d6',
+                showCloseButton: true,
+                showCancelButton: true,
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, update.',
+                cancelButtonText: "No, i'll check."
+            }).then((result) => {
+                if (result.value) {
+                    $(form).on('submit', function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        $(this).append($(card).find('.id_container'));
+                        $(this).append($($(card).find('.photo_container')));
+                        $(this).ajaxSubmit({
+                            success: (data) => {
+                                M.toast({ html: '<strong>' + data.success + '</strong>', classes: 'SUCCESS' });
+                                $(card).removeClass('extra-large');
+                                $(card).html(`
+                                        <input class="id_container" type="hidden" name="id"
+                                            value="` + product_updated.id + `">
+                                        <div class="card hoverable">
+                                            <div class="card-image waves-effect waves-block waves-light">
+                                                <img class="activator" src='` + data.photo + `'>
+                                            </div>
+                                            <div class="card-content">
+                                                <span
+                                                    class="card-title activator grey-text text-darken-4"><span>` + product_updated.name + `</span>
+                                                    <i class="material-icons right">more_vert</i>
+                                                </span>
+                                                <p class="card-title activator pink-text text-accent-3">
+                                                    <span>` + product_updated.price + "$" + `</span>
+                                                    <a onclick="edit(this)"
+                                                        class="waves-effect waves-light btn small right pink accent-3 edit-btn">
+                                                        <svg class="valigned" xmlns="http://www.w3.org/2000/svg"
+                                                            width="24" height="24" viewBox="0 0 24 28">
+                                                            <path fill="#FFFFFF"
+                                                                d="M1.438 16.872l-1.438 7.128 7.127-1.438 12.642-12.64-5.69-5.69-12.641 12.64zm2.271 2.253l-.85-.849 11.141-11.125.849.849-11.14 11.125zm20.291-13.436l-2.817 2.819-5.69-5.691 2.816-2.817 5.691 5.689z" />
+                                                        </svg>
+                                                    </a>
+                                                </p>
+                                            </div>
+                                            <div class="card-reveal">
+                                                <span class="card-title grey-text text-darken-4">` + product_updated.name + `<i
+                                                        class="material-icons right">close</i></span>
+                                                <p>` + product_updated.description + `</p>
+                                                <p>From <span
+                                                        class="pink-text text-accent-3">` + aux + `</span>
+                                                    Category</p>
+                                            </div>
+                                        </div>
+                                    `);
+                                card.unbind();
+                                product.photo = data.photo;
+                                console.log(product_updated);
+                            },
+                            error: (data) => {
+                                M.toast({ html: '<strong>' + data.error + '</strong>', classes: 'WARNING' });
+                            }
+                        });
+                        $(this).unbind();
+                        return false;
+                    });
+                    $(form).trigger('submit');
+
+                }
+            });
+        }
+        //SAME IMAGE PREVIEW CHANGE CODE ON JAVASCRIPT, DIFFERENT CONTAINER
+        function image_preview(elem) {
+            let card = $(elem).parentsUntil('div.col');
+            let file = elem.files[0];
+            let reader = new FileReader();
+            reader.onloadend = function () {
+                card.find('.card-image').find('img').attr('src', reader.result);
+            }
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+            }
+        }
+    </script>
+</body>
+
+</html>
