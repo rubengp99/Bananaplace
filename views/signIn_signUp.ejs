@@ -50,7 +50,7 @@
         }
 
         .parallax-background {
-            height: 100vh;
+            height: 105vh;
             background-attachment: fixed;
             background-image: url(https://wallpapercave.com/wp/wp3176709.jpg);
             background-size: cover;
@@ -58,12 +58,10 @@
 
         .fullscreen {
             display: flex;
-            min-height: 100vh;
-            overflow: initial;
-            overflow-x: hidden;
+            height: 100% !important;
+            overflow: hidden;
             scrollbar-width: none;
         }
-
 
 
         .carousel a {
@@ -119,13 +117,13 @@
         </div>
     </nav>
     <br>
-    <div class="row">
+    <div class="row" style="height: 100%;">
         <div id="carousel" class="carousel carousel-slider fullscreen">
-            <a class="carousel-item transparent" href="#one!">
+            <a class="carousel-item transparent">
                 <div class="col s12 m6 force-center">
                     <div class="card z-depth-2 grey lighten-5 s-large">
                         <form class="col s12" method="POST">
-                            <h4 class="center" style="color:#26a69a;margin-top: 40px;">Login</h4>
+                            <h4 class="center" style="color:#26a69a;margin-top: 40px;">Sign In</h4>
                             <br>
                             <div class="col s12 center">
                                 <img class="circle"
@@ -184,11 +182,11 @@
                     </div>
                 </div>
             </a>
-            <a class="carousel-item transparent" href="#two!">
+            <a class="carousel-item transparent">
                 <div class="col s12 m6 force-center">
                     <div class="card z-depth-2 grey lighten-5 s-large">
                         <form class="col s12" method="POST">
-                            <h4 class="center" style="color:#26a69a;margin-top: 40px;">Register</h4>
+                            <h4 class="center" style="color:#26a69a;margin-top: 40px;">Create Account</h4>
                             <div class="row">
                                 <div class="col s1"></div>
                                 <div class="col s10">
@@ -205,21 +203,28 @@
                                         </div>
                                         <div class="input-field col s6">
                                             <i class="material-icons prefix">account_circle</i>
-                                            <input onkeypress="validate(this,'username')" id="username" name="username" type="text" class="validate">
+                                            <input onmouseout="validate(this,'username')" id="username" name="username"
+                                                type="text" class="validate">
                                             <label for="username">Username</label>
-                                            <span class="helper-text" data-error="This username is already taken." data-success="It is available."></span>
+                                            <span class="helper-text" data-error="This username is already taken."
+                                                data-success="It is available."></span>
                                         </div>
                                         <div class="input-field col s6">
                                             <i class="material-icons prefix">person</i>
                                             <input id="Password" name="password" type="password" class="validate">
                                             <label for="Password">Password</label>
-                                            <span class="helper-text" data-error="Your password must contain numbers, an uppercase and a lowercase letter." data-success="This is a strong password."></span>
+                                            <span class="helper-text"
+                                                data-error="Your password must contain numbers, an uppercase and a lowercase letter."
+                                                data-success="This is a strong password."></span>
                                         </div>
                                         <div class="input-field col s6">
                                             <i class="material-icons prefix">mail</i>
-                                            <input onkeypress="validate(this,'email')" id="email" name="email" type="email" class="validate">
+                                            <input onmouseout="validate(this,'email')" id="email" name="email"
+                                                type="email" class="validate">
                                             <label for="email">Email</label>
-                                            <span class="helper-text" data-error="Sorry, but this email is already linked to another account." data-success="This one is okay."></span>
+                                            <span class="helper-text"
+                                                data-error="Sorry, but this email is already linked to another account."
+                                                data-success="This one is okay."></span>
                                         </div>
                                         <div class="input-field col s6">
                                             <i class="material-icons prefix">phone</i>
@@ -234,7 +239,7 @@
                                         </div>
                                         <div class="col s12">
                                             <label>
-                                                <input type="checkbox" class="filled-in" checked="checked" required/>
+                                                <input type="checkbox" class="filled-in" checked="checked" required />
                                                 <span class="grey-text text-darken-3">I accept the <span
                                                         class="pink-text text-accent-3">Terms of Service</span c> and
                                                     the <span class="pink-text text-accent-3">Privacy
@@ -255,7 +260,7 @@
                     </div>
                 </div>
             </a>
-            <a class="carousel-item transparent" href="#three!">
+            <a class="carousel-item transparent">
                 <div class="col s12 m6 force-center">
                     <div class="card z-depth-2 grey lighten-5 m-large">
                         <form class="col s12">
@@ -273,7 +278,8 @@
                                         <form action="">
                                             <div class="input-field col s12">
                                                 <i class="material-icons prefix">mail</i>
-                                                <input onkeypress="validate(this,'email')" id="Recover_email" name="email" type="text" class="validate">
+                                                <input onmouseout="validate(this,'email')" id="Recover_email"
+                                                    name="email" type="text" class="validate">
                                                 <label for="Recover_email">Email</label>
                                             </div>
                                             <div class="col s12">
@@ -310,9 +316,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
         $('select').formSelect();
-        $('textarea#direction').characterCounter();     
+        $('textarea#direction').characterCounter();
         let elems = document.querySelectorAll('.carousel');
-        let carousel = M.Carousel.init(elems, {fullWidth : true});
+        let carousel = M.Carousel.init(elems, { fullWidth: true });
         let carouselInstance = M.Carousel.getInstance(document.getElementById('carousel'));
         document.getElementById("carousel").removeEventListener('mousedown', carouselInstance._handleCarouselTapBound);
         document.getElementById("carousel").removeEventListener('mousemove', carouselInstance._handleCarouselDragBound);
@@ -324,16 +330,16 @@
             carousel[0].set(index);
         }
 
-        function register(elem){
+        function register(elem) {
             let form = $(elem).parentsUntil('form').find('.col.s10').find('.row').children();
             let user = {
-                first_name : $(form).eq(0).find('input').val(),
-                last_name : $(form).eq(1).find('input').val(),
-                username : $(form).eq(2).find('input').val(),
-                password : $(form).eq(3).find('input').val(),
-                email : $(form).eq(4).find('input').val(),
-                phone : $(form).eq(5).find('input').val(),
-                direction : $(form).eq(6).find('textarea').val(),
+                first_name: $(form).eq(0).find('input').val(),
+                last_name: $(form).eq(1).find('input').val(),
+                username: $(form).eq(2).find('input').val(),
+                password: $(form).eq(3).find('input').val(),
+                email: $(form).eq(4).find('input').val(),
+                phone: $(form).eq(5).find('input').val(),
+                direction: $(form).eq(6).find('textarea').val(),
             }
             Swal.fire({
                 title: "Just Checking.",
@@ -360,26 +366,43 @@
                         if (data.error) {
                             Swal.fire({
                                 title: "Something went wrong!",
-                                html : data.error,
+                                html: data.error,
                                 icon: 'error'
                             })
                         } else {
                             Swal.fire({
                                 title: "It's done!",
                                 html: data.success,
-                                icon: 'success'   
-                            }).then((result)=>{
+                                icon: 'success'
+                            }).then((result) => {
                                 move(0);
                             })
                         }
                     });
-
                 }
             });
         }
 
-        function validate(elem,data){
-
+        function validate(elem, data) {
+            if ($(elem).val() !== '') {
+                var promise = $.ajax({
+                    type: 'POST',
+                    url: "/check_" + data,
+                    dataType: 'json',
+                    data: (data === 'email') ? { email: $(elem).val() } : { username: $(elem).val() },
+                });
+                promise.always((data) => {
+                    if (data.error) {
+                        $(elem).addClass('invalid');
+                        $(elem).siblings().eq(2).attr('data-error', data.error);
+                        $(elem).removeClass('validate');
+                    } else {
+                        $(elem).addClass('valid');
+                        $(elem).siblings().eq(2).attr('data-success', data.success);
+                        $(elem).addClass('validate');
+                    }
+                });
+            }
         }
 
     </script>

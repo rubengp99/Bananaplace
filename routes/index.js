@@ -75,6 +75,30 @@ router.get('/add_product', (req, res) => {
   res.render('register_product');
 });
 
+// CHECK IF USER EXISTS WHILE TYPING ON THE REGISTER FORM
+router.post('/check_username', (req, res) => {
+  client
+    .query(`SELECT * FROM "public"."Users" WHERE user_username = '${req.body.username}'`)
+    .then(results =>{
+      if(results.rows[0]) 
+        res.json({ error: 'The username «'+req.body.username+'» is already taken.'})
+      else
+        res.json({ success: 'Good, you can take this one.'});
+    });
+});
+
+// CHECK IF EMAIL EXISTS WHILE TYPING ON THE REGISTER FORM
+router.post('/check_email', (req, res) => {
+  client
+    .query(`SELECT * FROM "public"."Users" WHERE user_email = '${req.body.email}'`)
+    .then(results =>{
+      if(results.rows[0]) 
+        res.json({ error: 'The email «'+req.body.email+'» is already linked to another account.'})
+      else
+        res.json({ success: 'This email is okay.'});
+    });
+});
+
 // PRODUCT REGISTER VIEW
 router.post('/add_user', (req, res) => {
   let response = {};
@@ -241,7 +265,7 @@ router.get('/password_recover', (req, res) => {
       console.log('Email sent: ' + info.response);
     }
   }); 
-  
+
 });
 
 
