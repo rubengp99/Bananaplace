@@ -63,6 +63,18 @@
             scrollbar-width: none;
         }
 
+        .info {
+            vertical-align: top;
+            font-size: 20px;
+        }
+
+        .info.valid{
+            color:green;
+        }
+
+        .info.invalid{
+            color:#d32f2f;
+        }
 
         .carousel a {
             color: black !important;
@@ -85,6 +97,131 @@
 
         .recover:hover {
             text-decoration: underline;
+        }
+
+        #pwd_strength_wrap {
+            border: 1px solid #D5CEC8;
+            display: block;
+            right: 50%;
+            padding: 10px;
+            position: absolute;
+            width: 300px;
+            background: white;
+            z-index: 2;
+            transform: translateX(50%);
+        }
+
+        #pwd_strength_wrap:before,
+        #pwd_strength_wrap:after {
+            content: ' ';
+            height: 0;
+            position: absolute;
+            width: 0;
+            border: 11px solid transparent;
+            /* arrow size */
+            left: 50%;
+            transform: translateX(50%);
+        }
+
+        /* 
+            ##Device = Most of the Smartphones Mobiles (Portrait)
+            ##Screen = B/w 320px to 479px
+        */
+
+        @media (width:320px) {
+            #pwd_strength_wrap {
+                transform: translateX(29.5%);
+            }
+        }
+
+        @media (min-width: 320px) and (max-width: 480px) {
+            #pwd_strength_wrap {
+                transform: translateX(27.5%);
+            }
+
+            #pwd_strength_wrap:before,
+            #pwd_strength_wrap:after {
+                left: 75%;
+                transform: translateX(75%);
+            }
+        }
+
+        #pwd_strength_wrap:before {
+            border-bottom: 12px solid rgba(0, 0, 0, 0.1);
+            border-right: 12px solid rgba(0, 0, 0, 0);
+            border-top: 12px solid rgba(0, 0, 0, 0);
+            content: "";
+            display: inline-block;
+            position: absolute;
+            top: -24px;
+        }
+
+        #pwd_strength_wrap:after {
+            border-bottom: 12px solid #fff;
+            border-right: 12px solid rgba(0, 0, 0, 0);
+            border-top: 12px solid rgba(0, 0, 0, 0);
+            content: "";
+            display: inline-block;
+            position: absolute;
+            top: -22px;
+        }
+
+        #pswd_info ul {
+            list-style-type: none;
+            margin: 5px 0 0;
+            padding: 0;
+        }
+
+        #pswd_info ul li {
+            background: url(icon_pwd_strength.png) no-repeat left 2px;
+            padding: 0px;
+        }
+
+        #pswd_info ul li.valid {
+            background-position: left -42px;
+            color: green;
+        }
+
+        #pswd_info ul li.invalid {
+            background-position: left -42px;
+            color: #d32f2f;
+        }
+
+        #passwordStrength {
+            display: block;
+            height: 5px;
+            margin-bottom: 10px;
+            transition: all 0.4s ease;
+        }
+
+        .strength0 {
+            background: none;
+            /* too short */
+            width: 0px;
+        }
+
+        .strength1 {
+            background: none repeat scroll 0 0 #FF4545;
+            /* weak */
+            width: 25px;
+        }
+
+        .strength2 {
+            background: none repeat scroll 0 0 #FFC824;
+            /* good */
+            width: 75px;
+        }
+
+        .strength3 {
+            background: none repeat scroll 0 0 #6699CC;
+            /* strong */
+            width: 100px;
+        }
+
+        .strength4 {
+            background: none repeat scroll 0 0 #008000;
+            /* best */
+            width: 150px;
         }
     </style>
 </head>
@@ -216,6 +353,31 @@
                                             <span class="helper-text"
                                                 data-error="Your password must contain numbers, an uppercase and a lowercase letter."
                                                 data-success="This is a strong password."></span>
+                                            <div id="pwd_strength_wrap">
+                                                <div id="passwordDescription"></div>
+                                                <div id="passwordStrength" class="strength0"></div>
+                                                <div id="pswd_info">
+                                                    <strong>Strong Password Tips:</strong>
+                                                    <ul>
+                                                        <li class="invalid" id="length"><i
+                                                                class="material-icons info invalid">info</i> At least 8
+                                                            characters</li>
+                                                        <li class="invalid" id="pnum"><i
+                                                                class="material-icons info invalid">info</i> At least one
+                                                            number [0-9]</li>
+                                                        <li class="invalid" id="capital_low"><i
+                                                                class="material-icons info invalid">info</i> At least one
+                                                            lowercase letter [a-z]</li>
+                                                        <li class="invalid" id="capital_up"><i
+                                                                class="material-icons info invalid">info</i> At least one
+                                                            uppercase letter [A-Z]</li>
+                                                        <li class="invalid" id="spchar"><i
+                                                                class="material-icons info invalid">info</i> At least one
+                                                            special char [.!@#$%&*]
+                                                        </li>
+                                                    </ul>
+                                                </div><!-- END pswd_info -->
+                                            </div><!-- END pwd_strength_wrap -->
                                         </div>
                                         <div class="input-field col s6">
                                             <i class="material-icons prefix">mail</i>
@@ -404,6 +566,86 @@
                 });
             }
         }
+
+        $("input#Password").on("focus keyup", function () {
+            var score = 0;
+            var a = $(this).val();
+            var desc = new Array();
+
+            // strength desc
+            desc[0] = "Too short...";
+            desc[1] = "Sorry, it's Weak.";
+            desc[2] = "It's Good.";
+            desc[3] = "It's Strong.";
+            desc[4] = "Really Strong!";
+
+            $("#pwd_strength_wrap").fadeIn(100);
+
+            // password length
+            if (a.length >= 8) {
+                $("#length").removeClass("invalid").addClass("valid");
+                $("#length").find('i').removeClass("invalid").addClass("valid");
+                $("#length").find('i').text('check_circle')
+                score++;
+            } else {
+                $("#length").removeClass("valid").addClass("invalid");
+                $("#length").removeClass("valid").addClass("invalid");
+                $("#length").find('i').text('info')
+
+            }
+
+            // at least 1 digit in password
+            if (a.match(/\d/)) {
+                $("#pnum").removeClass("invalid").addClass("valid");
+                $("#pnum").find('i').removeClass("invalid").addClass("valid");
+                $("#pnum").find('i').text('check_circle');
+                score++;
+            } else {
+                $("#pnum").removeClass("valid").addClass("invalid");
+                $("#pnum").find('i').removeClass("valid").addClass("invalid");
+                $("#pnum").find('i').text('info');
+
+            }
+
+            // at least 1 uppercase letter
+            if (a.match(/[A-Z]/)) {
+                $("#capital_up").removeClass("invalid").addClass("valid");
+                $("#capital_up").find('i').removeClass("invalid").addClass("valid");
+                $("#capital_up").find('i').text('check_circle');
+                score++;
+            } else {
+                $("#capital_up").removeClass("valid").addClass("invalid");
+                $("#capital_up").find('i').removeClass("valid").addClass("invalid");
+                $("#capital_up").find('i').text('info');
+            }
+
+            //at least 1 lowercase letter a.match(/[a-z]/)
+
+            // at least 1 special character in password {
+            if (a.match(/.[.,!,@,#,$,%,&,*]/)) {
+                $("#spchar").removeClass("invalid").addClass("valid");
+                $("#spchar").find('i').removeClass("invalid").addClass("valid");
+                $("#spchar").find('i').text('check_circle');
+                score++;
+            } else {
+                $("#spchar").removeClass("valid").addClass("invalid");
+                $("#spchar").find('i').removeClass("valid").addClass("invalid");
+                $("#spchar").find('i').text('info');
+            }
+
+
+            if (a.length > 0) {
+                //show strength text
+                $("#passwordDescription").text(desc[score]);
+                // show indicator
+                $("#passwordStrength").removeClass().addClass("strength" + score);
+            } else {
+                $("#passwordDescription").text("");
+                $("#passwordStrength").removeClass().addClass("strength" + score);
+            }
+        });
+
+        $("input#Password").blur(() => { $("#pwd_strength_wrap").fadeOut(100); });
 
     </script>
 </body>
