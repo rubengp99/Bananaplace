@@ -21,7 +21,6 @@
     "password-hash": "^1.2.2",
     "pg": "^7.17.1",
     "pg-tools": "^0.1.0",
-    "sharp": "^0.24.0",
     "sweetalert2": "^9.7.0"
   }
 }

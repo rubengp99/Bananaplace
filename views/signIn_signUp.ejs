@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Practice on Leiros - Sign In</title>
+    <title>Bananaplace - Sign In</title>
     <style>
         nav {
             z-index: 1;
@@ -109,6 +109,7 @@
             background: white;
             z-index: 2;
             transform: translateX(50%);
+            display: none;
         }
 
         #pwd_strength_wrap:before,
@@ -173,7 +174,7 @@
         }
 
         #pswd_info ul li {
-            background: url(icon_pwd_strength.png) no-repeat left 2px;
+            /*background: url(icon_pwd_strength.png) no-repeat left 2px;*/
             padding: 0px;
         }
 
@@ -201,27 +202,33 @@
         }
 
         .strength1 {
-            background: none repeat scroll 0 0 #FF4545;
+            background: none repeat scroll 0 0 rgb(240, 26, 26);
             /* weak */
-            width: 25px;
+            width: 20%;
         }
 
         .strength2 {
             background: none repeat scroll 0 0 #FFC824;
             /* good */
-            width: 75px;
+            width: 40%;
         }
 
         .strength3 {
-            background: none repeat scroll 0 0 #6699CC;
+            background: none repeat scroll 0 0 rgb(59, 138, 218);
             /* strong */
-            width: 100px;
+            width: 60%;
         }
 
         .strength4 {
-            background: none repeat scroll 0 0 #008000;
+            background: none repeat scroll 0 0 #1eda1e;
             /* best */
-            width: 150px;
+            width: 80%;
+        }
+
+        .strength5 {
+            background: none repeat scroll 0 0 #0d0d00;
+            /* REALLY STRONG */
+            width: 100%;
         }
     </style>
 </head>
@@ -582,14 +589,14 @@
             $("#pwd_strength_wrap").fadeIn(100);
 
             // password length
-            if (a.length >= 8) {
+            if (a.length > 7) {
                 $("#length").removeClass("invalid").addClass("valid");
                 $("#length").find('i').removeClass("invalid").addClass("valid");
                 $("#length").find('i').text('check_circle')
                 score++;
-            } else {
+            } else{
                 $("#length").removeClass("valid").addClass("invalid");
-                $("#length").removeClass("valid").addClass("invalid");
+                $("#length").find('i').removeClass("valid").addClass("invalid");
                 $("#length").find('i').text('info')
 
             }
@@ -620,6 +627,16 @@
             }
 
             //at least 1 lowercase letter a.match(/[a-z]/)
+            if (a.match(/[a-z]/)) {
+                $("#capital_low").removeClass("invalid").addClass("valid");
+                $("#capital_low").find('i').removeClass("invalid").addClass("valid");
+                $("#capital_low").find('i').text('check_circle');
+                score++;
+            } else {
+                $("#capital_low").removeClass("valid").addClass("invalid");
+                $("#capital_low").find('i').removeClass("valid").addClass("invalid");
+                $("#capital_low").find('i').text('info');
+            }
 
             // at least 1 special character in password {
             if (a.match(/.[.,!,@,#,$,%,&,*]/)) {

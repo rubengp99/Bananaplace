@@ -40,7 +40,7 @@ const upload = multer({
 const client = new Client({
   user: 'postgres',
   host: 'localhost',
-  database: 'Products_Ruben',
+  database: 'products_ruben',
   password: '12345',
   port: 5432,
 });
@@ -53,9 +53,9 @@ client.connect();
 router.get('/', (req, res) => {
 
   //OUR QUERY 
-  //"p" STANDS FOR "Products" TABLE, "p_c" STANDS FOR "Products_Category" TABLE
+  //"p" STANDS FOR "products" TABLE, "p_c" STANDS FOR "products_Category" TABLE
   const query = {
-    text: `SELECT p.product_name, p.product_price, p.product_photo, p_c.category_string, p.product_description, p.product_postdate  FROM "public"."Products" p INNER JOIN "public"."Product_Categories" p_c ON p.product_category = p_c.id ORDER BY p.product_postdate DESC`,
+    text: `SELECT p.product_name, p.product_price, p.product_photo, p_c.category_string, p.product_description, p.product_postdate  FROM "products" p INNER JOIN product_categories p_c ON p.product_category = p_c.category_id ORDER BY p.product_postdate DESC`,
     rowMode: 'array'
   }
 
@@ -78,10 +78,10 @@ router.get('/add_product', (req, res) => {
 // CHECK IF USER EXISTS WHILE TYPING ON THE REGISTER FORM
 router.post('/check_username', (req, res) => {
   client
-    .query(`SELECT * FROM "public"."Users" WHERE user_username = '${req.body.username}'`)
+    .query(`SELECT * FROM "users" WHERE user_username = '${req.body.username}'`)
     .then(results =>{
       if(results.rows[0]) 
-        res.json({ error: 'The username «'+req.body.username+'» is already taken.'})
+        res.json({ error: '«'+req.body.username+'» is already taken.'})
       else
         res.json({ success: 'Good, you can take this one.'});
     });
@@ -90,10 +90,10 @@ router.post('/check_username', (req, res) => {
 // CHECK IF EMAIL EXISTS WHILE TYPING ON THE REGISTER FORM
 router.post('/check_email', (req, res) => {
   client
-    .query(`SELECT * FROM "public"."Users" WHERE user_email = '${req.body.email}'`)
+    .query(`SELECT * FROM "users" WHERE user_email = '${req.body.email}'`)
     .then(results =>{
       if(results.rows[0]) 
-        res.json({ error: 'The email «'+req.body.email+'» is already linked to another account.'})
+        res.json({ error: '«'+req.body.email+'» is already linked to another account.'})
       else
         res.json({ success: 'This email is okay.'});
     });
@@ -117,15 +117,15 @@ router.post('/add_user', (req, res) => {
 
   //OUR QUERY 
   const query = {
-    text: `INSERT INTO "public"."Users" (user_username, user_firstname, user_lastname, user_document, user_document_type, user_email, user_phone, user_direction, user_birthday, user_last_activity, user_password) VALUES ('${user.username}', '${user.fist_name}','${user.last_name}','${user.document}','${user.document}','${user.email}','${user.phone}','${user.direction}',current_timestamp, current_timestamp, '${user.password}')`,
+    text: `INSERT INTO "users" (user_username, user_firstname, user_lastname, user_document, user_document_type, user_email, user_phone, user_direction, user_birthday, user_last_activity, user_password) VALUES ('${user.username}', '${user.fist_name}','${user.last_name}','${user.document}','${user.document}','${user.email}','${user.phone}','${user.direction}',current_timestamp, current_timestamp, '${user.password}')`,
   }
 
   client
-    .query(`SELECT * FROM "public"."Users" WHERE user_username = '${user.username}'`)
+    .query(`SELECT * FROM "users" WHERE user_username = '${user.username}'`)
     .then(results => {
       if (!results.rows[0]) {
         client
-          .query(`SELECT * FROM "public"."Users" WHERE user_email = '${user.email}'`)
+          .query(`SELECT * FROM "users" WHERE user_email = '${user.email}'`)
           .then(results => {
             if (!results.rows[0]) {
               client.query(query)
@@ -153,7 +153,7 @@ router.get('/sign_in', (req, res) => {
 
 router.get('/profile', (req, res) => {
   const query = {
-    text: `SELECT p.product_name, p.product_price, p.product_photo, p_c.category_string, p.product_description, p.product_id, p.product_category FROM "public"."Products" p INNER JOIN "public"."Product_Categories" p_c ON p.product_category = p_c.id ORDER BY p.product_postdate DESC`,
+    text: `SELECT p.product_name, p.product_price, p.product_photo, p_c.category_string, p.product_description, p.product_id, p.product_category FROM "products" p INNER JOIN product_categories p_c ON p.product_category = p_c.category_id ORDER BY p.product_postdate DESC`,
     rowMode: 'array'
   }
 
@@ -179,7 +179,7 @@ router.post('/add_product', upload.single('product_photo'), (req, res) => {
 
   //OUR QUERY 
   const query = {
-    text: `INSERT INTO "public"."Products"(product_name, product_price, product_category, product_photo, product_description,product_postdate,product_state,product_stock) VALUES('${product.name}', '${product.price}','${product.category}','${product.photo}','${product.description}',current_timestamp,'Available','${product.stock}')`,
+    text: `INSERT INTO "products"(product_name, product_price, product_category, product_photo, product_description,product_postdate,product_state,product_stock) VALUES('${product.name}', '${product.price}','${product.category}','${product.photo}','${product.description}',current_timestamp,'Available','${product.stock}')`,
   }
 
   // PROMISE
@@ -191,7 +191,7 @@ router.post('/add_product', upload.single('product_photo'), (req, res) => {
 //PRODUCT REMOVE
 router.post('/remove_product', (req, res) => {
   const query = {
-    text: `DELETE FROM "public"."Products" WHERE product_id = ${req.body.product_id}`,
+    text: `DELETE FROM "products" WHERE product_id = ${req.body.product_id}`,
   }
   // PROMISE
   client.query(query);
@@ -218,7 +218,7 @@ router.post('/update_product', upload.single('product_photo'), (req, res) => {
 
 
   const query = {
-    text: `UPDATE "public"."Products" SET product_name = '${product.name}', product_price = '${product.price}', product_category = '${product.category}', product_photo = '${product.photo}', product_description = '${product.description}', product_postdate = current_timestamp, product_state = 'Available', product_stock = '${product.stock}' WHERE product_id = ${product.id}`,
+    text: `UPDATE "products" SET product_name = '${product.name}', product_price = '${product.price}', product_category = '${product.category}', product_photo = '${product.photo}', product_description = '${product.description}', product_postdate = current_timestamp, product_state = 'Available', product_stock = '${product.stock}' WHERE product_id = ${product.id}`,
   }
   // PROMISE
   client.query(query).catch(e => console.error(e.stack));
