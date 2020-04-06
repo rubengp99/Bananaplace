@@ -495,6 +495,12 @@
         document.getElementById("carousel").removeEventListener('mouseleave', carouselInstance._handleCarouselReleaseBound);
         document.getElementById("carousel").removeEventListener('click', carouselInstance._handleCarouselClickBound);
 
+        $(document).keydown(function(objEvent) {
+            if (objEvent.keyCode == 9) {  //tab pressed
+                objEvent.preventDefault(); // stops its action
+            }
+        })
+
         function move(index) {
             carousel[0].set(index);
         }
@@ -548,6 +554,38 @@
                             })
                         }
                     });
+                }
+            });
+        }
+        
+        function login(elem){
+            let form = $(elem).parentsUntil('form').find('.col.s10').find('.row').children();
+            let user = {
+                username: $(form).eq(0).find('input').val(),
+                password: $(form).eq(1).find('input').val(),
+            }
+            var promise = $.ajax({
+                type: 'POST',
+                url: "/login",
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(user),
+            });
+            promise.always((data) => {
+                if (data.error) {
+                    Swal.fire({
+                        title: "Something went wrong!",
+                        html: data.error,
+                        icon: 'error'
+                    })
+                } else {
+                    Swal.fire({
+                        title: "It's done!",
+                        html: data.success,
+                        icon: 'success'
+                    }).then((result) => {
+                       window.location.href = '/'
+                    })
                 }
             });
         }

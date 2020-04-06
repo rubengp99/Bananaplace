@@ -5,11 +5,12 @@ let express = require('express'),
   moment = require('moment'),
   router = express.Router(),
   fs = require('fs'),
-  hash = require('password-hash'),
+  hash = require('bcrypt'),
   { Client } = require('pg'),
   { check, validationResult } = require('express-validator'),
   mailer = require('nodemailer'),
   uploaded = false;
+const salt = hash.genSaltSync(10);
 
 //-------------- APP CONFIGS --------------------//
 router.use(express.json());
@@ -106,7 +107,7 @@ router.post('/add_user', (req, res) => {
     fist_name: req.body.first_name,
     last_name: req.body.last_name,
     username: req.body.username,
-    password: hash.generate(req.body.password),
+    password: hash.hashSync(req.body.password,salt),
     email: req.body.email,
     phone: req.body.phone,
     direction: req.body.direction,
@@ -268,6 +269,20 @@ router.get('/password_recover', (req, res) => {
 
 });
 
+// CHECK IF USER EXISTS WHILE TYPING ON THE REGISTER FORM
+router.post('/login', (req, res) => {  
+  client
+    .query(`SELECT * FROM "users" WHERE user_username = '${req.body.username}'`)
+    .then(results =>{
+      if(!results.rows[0]) 
+        res.json({ error: "This username isn't registered."})
+      else
+        if (hash.compareSync(req.body.password, results.rows[0].user_password)){
+          res.json({ success: 'You logged in succesfully.'});
+        }else
+          res.json({ error: "These credentials doesn't match with our records."})
+    });
+});
 
 //-------------- END OF ROUTES --------------------//
 
