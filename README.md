@@ -35,11 +35,11 @@ The design of this profile view was inspired by GitLab.com's one. You can edit t
 
 ![7](screenshots/profile1.png)
 
-__
+___
 
 ![8](screenshots/profile2.png)
 
-__
+___
 
 ![9](screenshots/profile3.png)
 
@@ -51,11 +51,11 @@ __
 
 ![11](screenshots/profile5.png)
 
-__
+___
 
 ![12](screenshots/profile6.png)
 
-__
+___
 
 ![13](screenshots/profile7.png)
 
