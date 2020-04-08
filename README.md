@@ -35,7 +35,11 @@ The design of this profile view was inspired by GitLab.com's one. You can edit t
 
 ![7](screenshots/profile1.png)
 
+__
+
 ![8](screenshots/profile2.png)
+
+__
 
 ![9](screenshots/profile3.png)
 
@@ -47,9 +51,13 @@ The design of this profile view was inspired by GitLab.com's one. You can edit t
 
 ![11](screenshots/profile5.png)
 
+__
+
 ![12](screenshots/profile6.png)
 
-![13](screenshots/profile5.png)
+__
+
+![13](screenshots/profile7.png)
 
 
 
