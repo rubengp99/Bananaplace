@@ -9,7 +9,8 @@ let express = require('express'),
   { Client } = require('pg'),
   { check, validationResult } = require('express-validator'),
   mailer = require('nodemailer'),
-  uploaded = false;
+  uploaded = false,
+  file_uploaded;
 const salt = hash.genSaltSync(10);
 
 //-------------- APP CONFIGS --------------------//
@@ -63,12 +64,12 @@ router.get('/', (req, res) => {
   client.query(query).then(response => {
     let results = response.rows;
     //CHANGING THE POSTDATE FROM "Ex: Fri 25 2020..." to "Ex: 2 days ago."
-    for (let i = 0; i < results.length; i++) {
-      results[i][5] = moment(results[i][5], "YYYYMMDD").fromNow();;
+    for (const result of results) {
+      result[5] = moment(result[5], "YYYYMMDD").fromNow();
     }
     res.render('index', { results });
     res.end();
-  })
+  }).catch(e => console.error(e.getStack()));
 });
 
 // PRODUCT REGISTER VIEW
@@ -162,7 +163,7 @@ router.get('/profile', (req, res) => {
     let results = response.rows;
     res.render('profile', { results });
     res.end();
-  })
+  }).catch(e => console.log(e));
 });
 
 // SERVER SIDE PRODUCT REGISTER ROUTE
@@ -175,16 +176,17 @@ router.post('/add_product', upload.single('product_photo'), (req, res) => {
     description: req.body.product_description,
     category: req.body.product_category,
     photo: 'images/' + file_uploaded,
+    state: 0,
     stock: req.body.product_stock
   };
 
   //OUR QUERY 
   const query = {
-    text: `INSERT INTO "products"(product_name, product_price, product_category, product_photo, product_description,product_postdate,product_state,product_stock) VALUES('${product.name}', '${product.price}','${product.category}','${product.photo}','${product.description}',current_timestamp,'Available','${product.stock}')`,
+    text: `INSERT INTO products (product_name, product_price, product_category, product_photo, product_description,product_postdate,product_state,product_stock) VALUES('${product.name}', '${product.price}','${product.category}','${product.photo}','${product.description}',current_timestamp,'${product.state}','${product.stock}')`,
   }
 
   // PROMISE
-  client.query(query).then(res => console.log(res.rows[0])).catch(e => console.error(e.stack))
+  client.query(query).then(res => console.log(res.rows[0])).catch(e => console.log(e))
 
   res.redirect('/');
 });
@@ -206,7 +208,16 @@ router.post('/remove_product', (req, res) => {
 });
 
 //PRODUCT UPDATE
-router.post('/update_product', upload.single('product_photo'), (req, res) => {
+router.post('/update_product', (req, res) => {
+  res;
+  let e = req.body;
+  res.json({success: "ewe", s: e});
+
+  client.query(`SELECT * FROM products WHERE product_id = ${req.body.product_id}`).then(r =>{
+    if (r.rows[0])
+      if(!r.rows[0].product_photo === req.body.product_photo)
+        upload.single(req.body.product_photo)
+  })
   let product = {
     id: req.body.product_id,
     name: req.body.product_name,
@@ -214,12 +225,13 @@ router.post('/update_product', upload.single('product_photo'), (req, res) => {
     description: req.body.product_description,
     category: req.body.product_category,
     photo: 'images/' + file_uploaded,
-    stock: req.body.product_stock
+    stock: req.body.product_stock,
+    state: 0,
   };
-
-
+  
+  
   const query = {
-    text: `UPDATE "products" SET product_name = '${product.name}', product_price = '${product.price}', product_category = '${product.category}', product_photo = '${product.photo}', product_description = '${product.description}', product_postdate = current_timestamp, product_state = 'Available', product_stock = '${product.stock}' WHERE product_id = ${product.id}`,
+    text: `UPDATE products SET product_name = '${product.name}', product_price = '${product.price}', product_category = '${product.category}', product_photo = '${product.photo}', product_description = '${product.description}', product_postdate = current_timestamp, product_stock = '${product.stock}' WHERE product_id = ${product.id}`,
   }
   // PROMISE
   client.query(query).catch(e => console.error(e.stack));
@@ -229,7 +241,6 @@ router.post('/update_product', upload.single('product_photo'), (req, res) => {
     fs.unlink(path.join(__dirname, '../') + 'public/' + req.body.old_photo,
       (err) => { //res.json({ error: "ERROR! THIS PRODUCT CAN'T BE UPDATED"}); 
         updated = false;
-        console.log(err);
       });
 
     uploaded = false;
